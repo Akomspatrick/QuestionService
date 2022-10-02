@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Projections\QuestionairesEntityProjection.txt" />
+    <None Remove="Projections\QuestionEntityProjection.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Projections\QuestionairesEntityProjection.txt" />
+    <Compile Include="Projections\QuestionEntityProjection.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\QuestionService.Contracts\QuestionService.Contracts.csproj" />
+    <ProjectReference Include="..\FunctionalTools\FunctionalTools.csproj" />
+    <ProjectReference Include="..\QuestionService.Domain\QuestionService.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

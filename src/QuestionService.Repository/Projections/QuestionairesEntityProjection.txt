@@ -1,0 +1,8 @@
+﻿namespace QuestionService.Repository.Projections
+{
+    internal class QuestionairesEntityProjection
+    {
+        public string QuestionaireId { get; set; }
+        public IEnumerable<QuestionaireEntityProjection> Questionaires { get; set; }
+    }
+}

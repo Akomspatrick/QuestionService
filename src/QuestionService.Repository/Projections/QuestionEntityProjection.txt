@@ -1,0 +1,11 @@
+﻿using QuestionService.Domain.ValueObjects;
+
+namespace QuestionService.Repository.Projections
+{
+    internal class QuestionaireEntityProjection
+    {
+        public string QuestionnaireTitle { get; set; }
+
+        public IEnumerable<Question> QuestionText { get; set; }
+    }
+}
