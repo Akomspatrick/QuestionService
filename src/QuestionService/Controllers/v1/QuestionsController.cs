@@ -37,7 +37,7 @@ namespace QuestionService.Controllers.v1
         [HttpGet]
         public async Task<IActionResult> Get(string questionnaireTitle, CancellationToken cancellationToken)
         {
-            var IdQuestionTitle = await questionnaireTitle.EnsureInputIsNotNull(QueryableQuestionEntityFailure.OtherProblemsThatIdontKnowNow).AsAsync().// Bind(_ => SendGe(questionnaireTitle, cancellationToken));
+            var IdQuestionTitle = await questionnaireTitle.EnsureInputIsNotNull(QueryableQuestionEntityFailure.NotFoundInRepository).AsAsync().// Bind(_ => SendGe(questionnaireTitle, cancellationToken));
               Bind(_ => SendGetQuestionairewtTitleQuery(questionnaireTitle, cancellationToken)).Result.AsAsync();
 
             //Delevelop Binding and Mapping for the pipeline later

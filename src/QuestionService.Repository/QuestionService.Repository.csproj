@@ -23,8 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\QuestionService.Contracts\QuestionService.Contracts.csproj" />
     <ProjectReference Include="..\FunctionalTools\FunctionalTools.csproj" />
+    <ProjectReference Include="..\QuestionService.Contracts\QuestionService.Contracts.csproj" />
     <ProjectReference Include="..\QuestionService.Domain\QuestionService.Domain.csproj" />
   </ItemGroup>
 

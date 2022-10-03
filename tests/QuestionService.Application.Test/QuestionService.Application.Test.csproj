@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -24,7 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\QuestionService\QuestionService.csproj" />
+    <ProjectReference Include="..\..\src\QuestionService.Application\QuestionService.Application.csproj" />
+
+    <ProjectReference Include="..\..\src\QuestionService.Repository\QuestionService.Repository.csproj" />
+
+    <ProjectReference Include="..\QuestionService.Repository.Tests\QuestionService.Repository.Tests.csproj" />
   </ItemGroup>
 
 </Project>

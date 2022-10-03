@@ -24,9 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\QuestionService.Repository.Tests\QuestionService.Repository.Tests.csproj" />
-    <ProjectReference Include="..\src\QuestionService.Application\QuestionService.Application.csproj" />
-    <ProjectReference Include="..\src\QuestionService.Repository\QuestionService.Repository.csproj" />
+    <ProjectReference Include="..\..\src\QuestionService\QuestionService.csproj" />
   </ItemGroup>
 
 </Project>

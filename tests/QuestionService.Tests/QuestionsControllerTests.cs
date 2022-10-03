@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Security.Cryptography.X509Certificates;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using QuestionService.Application.Queries;
@@ -14,7 +15,7 @@ namespace QuestionService.Tests
 {
     public class QuestionsControllerTests
     {
-        private QuestionsController _sut;
+        private readonly QuestionsController _sut;
         private readonly Mock<ISender> _senderMock;
         public QuestionsControllerTests()
         {
@@ -24,18 +25,21 @@ namespace QuestionService.Tests
         }
 
         [Fact]
-        public async Task Get_Action_ShouldReturnNotFound_WhenQuestionNaireTitleDoesNotExist()
+        public async Task Get_Action_ShouldNotFoundInRepository_WhenQuestionNaireTitleDoesNotExist()
         {
 
             _senderMock.Setup(x => x.Send(It.IsAny<GetQuestionnairewtTitleQuery>(), It.IsAny<CancellationToken>())).
                 ReturnsAsync(
                     new Result<QuestionnaireEntity, QueryableQuestionEntityFailure>(QueryableQuestionEntityFailure.NotFoundInRepository)
                     );
-            var result = (NotFoundObjectResult)await _sut.Get(It.IsAny<string>(), CancellationToken.None);
+            var result = (ResultAction)await _sut.Get(It.IsAny<string>(), CancellationToken.None);
             //Assert
-            result.Value.ShouldBe("Questionnaire Not Found");
-
+            var x = result.Value;
+            result.Value.Failures.ShouldContain(QueryableQuestionEntityFailure.NotFoundInRepository); 
+          
         }
+
+
         [Fact]
         public async Task Get_Action_ShouldReturnStatusCode404_WhenQuestionNaireTitleDoesNotExist()
         {
@@ -44,14 +48,15 @@ namespace QuestionService.Tests
                 ReturnsAsync(
                     new Result<QuestionnaireEntity, QueryableQuestionEntityFailure>(QueryableQuestionEntityFailure.NotFoundInRepository)
                     );
-            var result = (NotFoundObjectResult)await _sut.Get(It.IsAny<string>(), CancellationToken.None);
+            var result = (ResultAction)await _sut.Get(It.IsAny<string>(), CancellationToken.None);
             //Assert
             result.StatusCode.ShouldBe(404);
 
         }
 
+
         [Fact]
-        public async Task Get_Action_ShouldReturnAnOkObject_WhenUserExist()
+        public async Task Get_Action_ShouldResultAction_WhenUserExist()
         {
             //arrange
             var _questionaireEntities =
@@ -73,11 +78,11 @@ namespace QuestionService.Tests
                     new Result<QuestionnaireEntity, QueryableQuestionEntityFailure>(_questionaireEntities)
                     );
             //Act
-            var result = (OkObjectResult)await _sut.Get(questionnaireTitle, CancellationToken.None);
+            var result = (ResultAction)await _sut.Get(questionnaireTitle, CancellationToken.None);
 
             //Assert
             Assert.NotNull(result);
-            result.StatusCode.ShouldBe(200);
+           result.StatusCode.ShouldBe(200);
 
         }
 
@@ -106,13 +111,12 @@ namespace QuestionService.Tests
                     );
             //Act
 
-            var result = (OkObjectResult)await _sut.Get(questionnaireTitle, CancellationToken.None);
+            var result = (ResultAction)await _sut.Get(questionnaireTitle, CancellationToken.None);
             //Assert
             //       
-            var obj = (QuestionnaireEntityResponse)result.Value;
+            var obj = result.Value.Success;
 
-            obj.ShouldBeEquivalentTo(_questionaireEntities.MapToSuccessResponse());
-
+            obj.ShouldBeEquivalentTo(_questionaireEntities);
 
 
         }
