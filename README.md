@@ -1,1 +1,2 @@
-##  QuestionService : CLICK ON THE APIUASGE PDF TO FIND A COMPREHENSIVE GUIDE
+##  QuestionService : Click on the ApiUsage link below to find a comprehensive guide 
+https://github.com/Akomspatrick/QuestionService/blob/main/APIUSAGE.pdf 
